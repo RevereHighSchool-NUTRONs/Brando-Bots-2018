@@ -29,7 +29,10 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import android.text.ParcelableSpan;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -47,8 +50,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import java.util.Locale;
 
-@TeleOp(name="Gyro Testing E", group="Gyro Testing")
-public class GyroTesting extends LinearOpMode {
+@TeleOp(name="Gyro Testing J", group="Gyro Testing")
+public class GyroLogTesting extends LinearOpMode {
 
     private ElapsedTime runtime;
     private BNO055IMU imu;
@@ -68,6 +71,10 @@ public class GyroTesting extends LinearOpMode {
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled = true;
+        parameters.loggingTag = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
@@ -78,30 +85,25 @@ public class GyroTesting extends LinearOpMode {
         gravity = imu.getGravity();
 
         telemetry.addData("Status", "Initialized");
-
+        telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-
-            double leftPower;
-            double rightPower;
-
-            double turn = -gamepad1.left_stick_y;
-            double drive = -gamepad1.right_stick_x;
-            leftPower = Range.clip(drive + turn, -1.0, 1.0);
-            rightPower = Range.clip(drive - turn, -1.0, 1.0);
+            double leftPower = -gamepad1.right_stick_y;
+            double rightPower = gamepad1.left_stick_y;
 
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
 
-            telemetry.addData("angle", formatAngle(angles.angleUnit, angles.thirdAngle));
+            angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+            telemetry.addData("Heading", angles.firstAngle); //Left is negative right is positive
             telemetry.update();
             }
         }
-
 
     void composeTelemetry() {
 
