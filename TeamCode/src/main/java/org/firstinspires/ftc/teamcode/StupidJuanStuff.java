@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -51,71 +52,63 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="hehexd", group="Linear Opmode")
+@TeleOp(name="click this if your a bitch", group="Linear Opmode")
 
-public class BasicOpMode_Linear extends LinearOpMode {
+public class StupidJuanStuff extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftDrive = null;
-    private DcMotor rightDrive = null;
-    private DcMotor armGrab = null;
-    private Servo servo1 = null;
-    private Servo servo2 = null;
+    private DcMotor leftDrive;
+    private DcMotor rightDrive;
+    private DcMotor armGrab;
+    private Servo servo1;
+    private Servo servo2;
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
         leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         armGrab = hardwareMap.get(DcMotor.class, "arm_grab");
         servo1 = hardwareMap.get(Servo.class, "servo_1");
         servo2 = hardwareMap.get(Servo.class, "servo_2");
 
-        // Most robots need the motor on one side to be reversed to drive forward
-        // Reverse the motor that runs backwards when connected directly to the battery
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
 
-        // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
 
-
         while (opModeIsActive()) {
-
-
             double leftPower;
             double rightPower;
 
-            leftPower  = -gamepad1.left_stick_y;
-            rightPower = -gamepad1.right_stick_y;
+            leftPower  = stickDeadband(-gamepad1.left_stick_y, 0.005, 0.0);
+            rightPower = stickDeadband(-gamepad1.right_stick_y, 0.005, 0.0);
 
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
 
             //this is the grabber
             if (gamepad1.dpad_up) {
+                servo1.setPosition(0.5);
+                servo2.setPosition(0.0);
+            } else {
                 servo1.setPosition(1.0);
                 servo2.setPosition(1.0);
-            } else {
-                servo1.setPosition(0.0);
-                servo2.setPosition(0.0);
             }
             //this is the arm
             if (gamepad1.right_bumper) {
-                armGrab.setPower(-0.5);
-                while (gamepad1.right_bumper){
-                    if (gamepad1.right_bumper){
-                        armGrab.setPower(0.0);
+                armGrab.setPower(-1.0);
+                    if (gamepad1.left_bumper){
+                        armGrab.setPower(1.0);
                     }
                 }
             }
         }
+    public static double stickDeadband(double value, double deadband, double center) {
+        return (value < (center + deadband) && value > (center - deadband)) ? center : value;
     }
 }
