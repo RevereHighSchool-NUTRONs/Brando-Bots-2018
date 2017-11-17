@@ -17,6 +17,7 @@ public class BBMotor {
 
     public enum MotorType {
         RevHDHex,
+        RevCoreHex,
         NeveRest,
     }
 
@@ -39,6 +40,8 @@ public class BBMotor {
         this.motorType = motorType;
         switch(motorType) {
             case RevHDHex: countsPerRev = 2240;
+                break;
+            case RevCoreHex: countsPerRev = 228;
                 break;
             case NeveRest: countsPerRev = 1120;
                 break;

@@ -4,7 +4,10 @@ package org.firstinspires.ftc.teamcode;
  * Created by Josh on 10/12/2017.
  */
 
+import android.hardware.camera2.DngCreator;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /**
@@ -18,6 +21,8 @@ public class BB18Map {
     //DcMotor leftBackDrive;
     DcMotor rightFrontDrive;
     //DcMotor rightBackDrive;
+    DcMotor intake;
+    DigitalChannel intakeLimit;
 
     // Class Map
     HardwareMap hwMap;
@@ -28,7 +33,8 @@ public class BB18Map {
 
     public void init(HardwareMap hardwareMap) {
         this.hwMap = hardwareMap;
-
+        intake = hwMap.get(DcMotor.class, "intake");
+        intakeLimit  = hwMap.get(DigitalChannel.class ,"intakeLimit");
         // Motors
         leftFrontDrive = hwMap.get(DcMotor.class, "leftF");
         //leftBackDrive = hwMap.get(DcMotor.class, "leftB");

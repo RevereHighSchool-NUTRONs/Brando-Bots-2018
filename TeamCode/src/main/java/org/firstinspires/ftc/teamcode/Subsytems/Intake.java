@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsytems;
 
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+
 import org.firstinspires.ftc.teamcode.BB18;
 import org.firstinspires.ftc.teamcode.Hardware.BBMotor;
 
@@ -8,9 +10,8 @@ import org.firstinspires.ftc.teamcode.Hardware.BBMotor;
  */
 
 public class Intake {
-   public static BBMotor intake;
-    // wheel circumference
-    private final double wheelCircumfrence = Math.PI * 3.875;
+    public static BBMotor intake;
+    public static DigitalChannel Touchsensor;
     // intake constructor
     public Intake (BBMotor inatke){
 
@@ -21,8 +22,8 @@ public class Intake {
         intake.setPower(Power);
     }
     // used to reverse the direction of the intake to spit the cube.
-    public static void siit(int power){
-        drive(-power);
+    public static void spit(int Power){
+        drive(-Power);
     }
 
 }
