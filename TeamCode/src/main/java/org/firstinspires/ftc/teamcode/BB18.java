@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Hardware.BBMotor;
+import org.firstinspires.ftc.teamcode.Subsytems.Intake;
 
 /**
  * Created by Josh on 10/12/2017.
@@ -15,7 +16,9 @@ public class BB18 {
     //public BBMotor leftBackDrive;
     public BBMotor rightFrontDrive;
     //public BBMotor rightBackDrive;
-
+    public BBMotor intake;
+    public BBMotor elevatorL;
+    public BBMotor elevatorR;
     //Wheel Circumfrence
     private double wheelCircumfrence = Math.PI * 3.875; //Inches
 
@@ -28,6 +31,8 @@ public class BB18 {
         //leftBackDrive = new BBMotor(hardware.leftBackDrive, BBMotor.MotorType.RevHDHex);
         rightFrontDrive = new BBMotor(hardware.rightFrontDrive, BBMotor.MotorType.RevHDHex);
         //rightBackDrive = new BBMotor(hardware.rightBackDrive, BBMotor.MotorType.RevHDHex);
+        intake = new BBMotor(hardware.intake, BBMotor.MotorType.RevHDHex);
+
     }
 
     public void inchDrive(double inches, double speed) {
