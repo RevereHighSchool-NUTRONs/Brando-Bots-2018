@@ -53,7 +53,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="click this if your a bitch", group="Linear Opmode")
-
+@Disabled
 public class StupidJuanStuff extends LinearOpMode {
 
     // Declare OpMode members.
