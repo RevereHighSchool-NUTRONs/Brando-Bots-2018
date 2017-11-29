@@ -18,6 +18,7 @@ public class BBMotor {
     public enum MotorType {
         RevHDHex,
         NeveRest,
+        CoreHex,
     }
 
     /**
@@ -41,6 +42,8 @@ public class BBMotor {
             case RevHDHex: countsPerRev = 2240;
                 break;
             case NeveRest: countsPerRev = 1120;
+                break;
+            case CoreHex:countsPerRev = 288;
                 break;
         }
     }

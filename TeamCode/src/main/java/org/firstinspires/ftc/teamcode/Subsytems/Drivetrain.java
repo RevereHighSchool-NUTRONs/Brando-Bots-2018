@@ -88,8 +88,8 @@ public class Drivetrain {
         lastTime = 0.;
     }
 
-    public void setAngleToHold(double angle) {
-        headingToHold = angle;
+    public void setAngleToHold(double angleToHold) {
+        headingToHold = angleToHold;
     }
 
     /**
@@ -119,7 +119,7 @@ public class Drivetrain {
         }
         leftFrontDrive.setPower(lP);
         //leftBackDrive(lP);
-        rightFrontDrive.setPower(-rP);
+        rightFrontDrive.setPower(rP);
         //rightBackDrive(rP);
     }
 }
