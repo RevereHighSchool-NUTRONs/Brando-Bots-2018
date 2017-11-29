@@ -28,7 +28,7 @@ public class Drivetrain {
     private BBMotor rightFrontDrive;
     //public BBMotor rightBackDrive;
 
-    //IMU declared
+    //Gyro declared
     private BBGyro gyro;
 
 
