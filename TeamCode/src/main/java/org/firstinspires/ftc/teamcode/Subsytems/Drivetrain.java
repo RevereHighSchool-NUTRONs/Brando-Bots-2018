@@ -16,7 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Drivetrain {
 
-    //PD constants for control
+    //PD constants for control g is for Gyro, k is for Drivetrain
     private final double kP = 1.0;
     private final double kD = 0.5;
     private final double gP = 1.0;
