@@ -32,7 +32,7 @@ public class Drivetrain {
     private BBGyro gyro;
 
 
-    //Declaring drivetrain specifics
+    //Declaring drivetrain specifics for driving distance
     private double wheelCircumfrence;
     private double ticksPerRev;
     private double feetPerTick;
