@@ -10,6 +10,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.Subsytems.Elevator;
+import org.firstinspires.ftc.teamcode.Subsytems.Intake;
+
 /**
  * The purpose of the BB18Map class is to work together with a Robot class to add easy implementation across op-modes and auto.
  * Holds named concurrent to that of the robot controller.
@@ -21,7 +24,8 @@ public class BB18Map {
     //DcMotor leftBackDrive;
     DcMotor rightFrontDrive;
     //DcMotor rightBackDrive;
-    DcMotor intake;
+    DcMotor intakeR;
+    DcMotor intakeL;
     DigitalChannel intakeLimit;
 
     // Class Map
@@ -33,7 +37,8 @@ public class BB18Map {
 
     public void init(HardwareMap hardwareMap) {
         this.hwMap = hardwareMap;
-        intake = hwMap.get(DcMotor.class, "intake");
+        intakeL = hwMap.get(DcMotor.class, "intakeL");
+        intakeR = hwMap.get(DcMotor.class,"intakeR");
         intakeLimit  = hwMap.get(DigitalChannel.class ,"intakeLimit");
         // Motors
         leftFrontDrive = hwMap.get(DcMotor.class, "leftF");

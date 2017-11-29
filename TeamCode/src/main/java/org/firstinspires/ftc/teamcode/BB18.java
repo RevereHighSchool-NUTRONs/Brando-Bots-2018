@@ -16,7 +16,7 @@ public class BB18 {
     //public BBMotor leftBackDrive;
     public BBMotor rightFrontDrive;
     //public BBMotor rightBackDrive;
-    public BBMotor intake;
+    public BBMotor intakeL;
     public BBMotor elevatorL;
     public BBMotor elevatorR;
     //Wheel Circumfrence
@@ -31,7 +31,8 @@ public class BB18 {
         //leftBackDrive = new BBMotor(hardware.leftBackDrive, BBMotor.MotorType.RevHDHex);
         rightFrontDrive = new BBMotor(hardware.rightFrontDrive, BBMotor.MotorType.RevHDHex);
         //rightBackDrive = new BBMotor(hardware.rightBackDrive, BBMotor.MotorType.RevHDHex);
-        intake = new BBMotor(hardware.intake, BBMotor.MotorType.RevHDHex);
+        intakeL = new BBMotor(hardware.intakeL, BBMotor.MotorType.RevHDHex);
+
 
     }
 

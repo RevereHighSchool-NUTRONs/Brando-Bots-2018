@@ -10,19 +10,21 @@ import org.firstinspires.ftc.teamcode.Hardware.BBMotor;
  */
 
 public class Intake {
-    public static BBMotor intake;
-    public static DigitalChannel Touchsensor;
+    private BBMotor intake;
+    public static DigitalChannel touchsensor;
     // intake constructor
-    public Intake (BBMotor inatke){
-
+    public Intake (BBMotor succ, DigitalChannel button){
+        this.intake = succ;
+        this.touchsensor = button;
 
     }
     // used for intaking the cube
-    public static void drive(int Power) {
+    public void drive(int Power) {
         intake.setPower(Power);
     }
     // used to reverse the direction of the intake to spit the cube.
-    public static void spit(int Power){
+    public void spit(int Power){
+
         drive(-Power);
     }
 

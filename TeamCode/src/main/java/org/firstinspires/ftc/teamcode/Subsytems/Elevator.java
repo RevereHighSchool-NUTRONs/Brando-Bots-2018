@@ -10,14 +10,20 @@ import org.firstinspires.ftc.teamcode.Hardware.BBMotor;
  */
 
 public class Elevator {
-    public static BBMotor pivotL;
-    public static BBMotor pivotR;
-
+    private BBMotor armLPivot;
+    private BBMotor armRPivot;
+    private BBMotor leadScrew;
     // Servo that clamp the cube
-    public static Servo leftServo;
-    public static Servo rightServo;
+    private  Servo leftServo;
+    private  Servo rightServo;
 
-    public Elevator(BBMotor pivotL , BBMotor pivotR , Servo lServo ,Servo rServo ){}
+    public Elevator(BBMotor pivotL , BBMotor pivotR , BBMotor lead, Servo lServo ,Servo rServo ){
+        this.armLPivot = pivotL;
+        this.armRPivot = pivotR;
+        this.leadScrew = lead;
+        this.leftServo = lServo;
+        this.rightServo = rServo;
+    }
 
 
 }
