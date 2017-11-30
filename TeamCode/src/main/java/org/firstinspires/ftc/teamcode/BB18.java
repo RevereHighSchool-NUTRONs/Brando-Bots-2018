@@ -14,9 +14,9 @@ public class BB18 {
 
     //Declaring drivetrain motors and objects
     public BBMotor leftFrontDrive;
-    //public BBMotor leftBackDrive;
+    public BBMotor leftBackDrive;
     public BBMotor rightFrontDrive;
-    //public BBMotor rightBackDrive;
+    public BBMotor rightBackDrive;
     public Drivetrain BBDrive;
 
     //IMU
@@ -36,11 +36,11 @@ public class BB18 {
 
         //Assigning Drivetrain Motors and Object
         leftFrontDrive = new BBMotor(robotMap.leftFrontDrive, BBMotor.MotorType.RevHDHex);
-        //leftBackDrive = new BBMotor(robotMap.leftBackDrive, BBMotor.MotorType.RevHDHex);
+        leftBackDrive = new BBMotor(robotMap.leftBackDrive, BBMotor.MotorType.RevHDHex);
         rightFrontDrive = new BBMotor(robotMap.rightFrontDrive, BBMotor.MotorType.RevHDHex);
-        //rightBackDrive = new BBMotor(robotMap.rightBackDrive, BBMotor.MotorType.RevHDHex);
+        rightBackDrive = new BBMotor(robotMap.rightBackDrive, BBMotor.MotorType.RevHDHex);
         gyro = new BBGyro(robotMap.gyro); // Assigning IMU
-        BBDrive = new Drivetrain(leftFrontDrive,rightFrontDrive, gyro);
+        BBDrive = new Drivetrain(leftFrontDrive, leftBackDrive, rightFrontDrive, rightBackDrive, gyro);
     }
 
 }

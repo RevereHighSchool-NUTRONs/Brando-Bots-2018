@@ -24,9 +24,9 @@ public class Drivetrain {
 
     //Motors declared
     private BBMotor leftFrontDrive;
-    //public BBMotor leftBackDrive;
+    private BBMotor leftBackDrive;
     private BBMotor rightFrontDrive;
-    //public BBMotor rightBackDrive;
+    private BBMotor rightBackDrive;
 
     //Gyro declared
     private BBGyro gyro;
@@ -55,9 +55,11 @@ public class Drivetrain {
      * @param rF right front motor of the drivetrain
      * @param gyro gyro used for heading
      */
-    public Drivetrain(BBMotor lF, BBMotor rF, BBGyro gyro) {
+    public Drivetrain(BBMotor lF, BBMotor lB, BBMotor rF, BBMotor rB, BBGyro gyro) {
         this.leftFrontDrive = lF;
         this.rightFrontDrive = rF;
+        this.leftBackDrive = lB;
+        this.rightBackDrive = rB;
 
         //Drivetrain specifics initialized
         wheelCircumfrence = Math.PI * (1/3); // Feet
@@ -118,8 +120,8 @@ public class Drivetrain {
             rP -= turn;
         }
         leftFrontDrive.setPower(lP);
-        //leftBackDrive(lP);
-        rightFrontDrive.setPower(rP);
-        //rightBackDrive(rP);
+        leftBackDrive.setPower(lP);
+        rightFrontDrive.setPower(-rP);
+        rightBackDrive.setPower(-rP);
     }
 }
