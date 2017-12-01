@@ -22,6 +22,9 @@ public class Drivetrain {
     private final double gP = 1.0;
     private final double gD = 0.5;
 
+    private double privateVar = 1.0;
+    public double publicVar = 2.0;
+
     //Motors declared
     private BBMotor leftFrontDrive;
     private BBMotor leftBackDrive;

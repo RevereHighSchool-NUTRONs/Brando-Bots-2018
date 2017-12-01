@@ -29,27 +29,53 @@
 
 package org.firstinspires.ftc.teamcode.Gamecode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.BB18;
-import org.firstinspires.ftc.teamcode.Subsytems.Util;
+/**
+ * This file contains an example of an iterative (Non-Linear) "OpMode".
+ * An OpMode is a 'program' that runs in either the autonomous or the teleop period of an FTC match.
+ * The names of OpModes appear on the menu of the FTC Driver Station.
+ * When an selection is made from the menu, the corresponding OpMode
+ * class is instantiated on the Robot Controller and executed.
+ *
+ * This particular OpMode just executes a basic Tank Drive Teleop for a two wheeled robot
+ * It includes all the skeletal structure that all iterative OpModes contain.
+ *
+ * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
+ * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
+ */
 
-@TeleOp(name="Testing 6", group="Gamecode")
-public class DistanceDriveTest extends OpMode
+@TeleOp(name="Patrick", group="Iterative Opmode")
+public class PatrickRobot4Motor extends OpMode
 {
-    BB18 robot;
-    int autoState;
+    // Declare OpMode members.
+    private ElapsedTime runtime = new ElapsedTime();
+    private DcMotor leftDriveFront = null;
+    private DcMotor rightDriveFront = null;
+    private DcMotor leftDriveBack = null;
+    private DcMotor rightDriveBack = null;
 
     /*
      * Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
-        robot = new BB18(hardwareMap);
+
+        leftDriveFront  = hardwareMap.get(DcMotor.class, "lF");
+        rightDriveFront = hardwareMap.get(DcMotor.class, "rF");
+        leftDriveBack  = hardwareMap.get(DcMotor.class, "lB");
+        rightDriveBack = hardwareMap.get(DcMotor.class, "rB");
+
     }
 
-
+    /*
+     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
+     */
     @Override
     public void init_loop() {
 
@@ -59,49 +85,35 @@ public class DistanceDriveTest extends OpMode
      * Code to run ONCE when the driver hits PLAY
      */
     @Override
-    public void start(){
-        autoState = 0;
-        robot.BBDrive.resetDriveDistance();
-        robot.BBDrive.setAngleToHold(0.0);
+    public void start() {
+        runtime.reset();
     }
-
 
     /*
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     @Override
     public void loop() {
+        // Setup a variable for each drive wheel to save power level for telemetry
+        double leftPower;
+        double rightPower;
 
-        switch (autoState) {
-            case 0:
-                if(robot.BBDrive.distanceDrive(10.0)){
-                    autoState = 1;
-                    robot.BBDrive.resetDriveDistance();
-                }
-                break;
-            case 1:
-                if(robot.BBDrive.turnToAngle(90.0)) {
-                    autoState = 2;
-                    robot.BBDrive.setAngleToHold(90.0);
-                }
-                break;
-            case 2:
-                if(robot.BBDrive.distanceDrive(5.0)) {
-                    autoState = 3;
-                    robot.BBDrive.resetDriveDistance();
-                }
-                break;
-            default:
-                break;
-        }
+        leftPower = gamepad1.left_stick_y;
+        rightPower = -gamepad1.right_stick_y;
 
+        // Send calculated power to wheels
+        leftDriveFront.setPower(leftPower);
+        rightDriveFront.setPower(rightPower);
+        leftDriveBack.setPower(leftPower);
+        rightDriveBack.setPower(rightPower);
 
     }
 
-
+    /*
+     * Code to run ONCE after the driver hits STOP
+     */
     @Override
     public void stop() {
-
     }
 
 }
