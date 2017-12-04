@@ -17,7 +17,7 @@ public class SupremeElevator {
     private Servo jewel;
 
     /**
-     * Cool elevator
+     * Elevator constructor
      */
     public SupremeElevator(BBMotor elevator, Servo leftGrabber, Servo rightGrabber, Servo jewel) {
         this.elevator = elevator;
