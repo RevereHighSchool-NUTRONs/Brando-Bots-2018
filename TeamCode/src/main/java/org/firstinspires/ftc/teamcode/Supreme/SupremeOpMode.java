@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Gamecode;
+package org.firstinspires.ftc.teamcode.Supreme;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -50,68 +50,54 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Patrick", group="Iterative Opmode")
-public class PatrickRobot4Motor extends OpMode
+@TeleOp(name="Supreme Op Mode", group="Iterative Opmode")
+public class SupremeOpMode extends OpMode
 {
-    // Declare OpMode members.
-    private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftDriveFront = null;
-    private DcMotor rightDriveFront = null;
-    private DcMotor leftDriveBack = null;
-    private DcMotor rightDriveBack = null;
+    SupremeRobot robot;
 
-    /*
-     * Code to run ONCE when the driver hits INIT
-     */
     @Override
     public void init() {
-
-        leftDriveFront  = hardwareMap.get(DcMotor.class, "lF");
-        rightDriveFront = hardwareMap.get(DcMotor.class, "rF");
-        leftDriveBack  = hardwareMap.get(DcMotor.class, "lB");
-        rightDriveBack = hardwareMap.get(DcMotor.class, "rB");
-
+        robot = new SupremeRobot(hardwareMap);
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
-     */
     @Override
     public void init_loop() {
-
     }
 
-    /*
-     * Code to run ONCE when the driver hits PLAY
-     */
     @Override
     public void start() {
-        runtime.reset();
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
-     */
     @Override
     public void loop() {
-        // Setup a variable for each drive wheel to save power level for telemetry
-        double leftPower;
-        double rightPower;
+        double leftPow;
+        double rightPow;
 
-        leftPower = gamepad1.left_stick_y;
-        rightPower = -gamepad1.right_stick_y;
+        double elevPow;
 
-        // Send calculated power to wheels
-        leftDriveFront.setPower(leftPower);
-        rightDriveFront.setPower(rightPower);
-        leftDriveBack.setPower(leftPower);
-        rightDriveBack.setPower(rightPower);
+        leftPow = gamepad1.left_stick_y;
+        rightPow = gamepad1.right_stick_y;
+
+        elevPow = gamepad2.left_stick_y;
+
+        robot.supremeDrive.drive(leftPow, rightPow);
+        robot.elevator.drive(elevPow);
+
+        if(gamepad2.dpad_up) {
+            robot.elevator.controlJewel(false);
+        }
+        if(gamepad2.dpad_down) {
+            robot.elevator.controlJewel(true);
+        }
+        if(gamepad2.left_bumper) {
+            robot.elevator.controlGrabber(true);
+        }
+        if(gamepad2.right_bumper) {
+            robot.elevator.controlGrabber(false);
+        }
 
     }
 
-    /*
-     * Code to run ONCE after the driver hits STOP
-     */
     @Override
     public void stop() {
     }
