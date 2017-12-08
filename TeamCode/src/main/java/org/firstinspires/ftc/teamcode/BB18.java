@@ -1,10 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Hardware.BBGyro;
-import org.firstinspires.ftc.teamcode.Hardware.BBMotor;
+import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBGyro;
+import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBMotor;
 import org.firstinspires.ftc.teamcode.Subsytems.Drivetrain;
 
 /**

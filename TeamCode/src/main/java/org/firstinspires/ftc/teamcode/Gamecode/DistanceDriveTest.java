@@ -33,7 +33,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.BB18;
-import org.firstinspires.ftc.teamcode.Subsytems.Util;
 
 @TeleOp(name="Testing 6", group="Gamecode")
 public class DistanceDriveTest extends OpMode

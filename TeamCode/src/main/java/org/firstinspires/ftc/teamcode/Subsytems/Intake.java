@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.Subsytems;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Hardware.BBMotor;
+import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBMotor;
 
 /**
  * Created by josh on 12/1/17.
