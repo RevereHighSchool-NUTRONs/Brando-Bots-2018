@@ -16,14 +16,28 @@ public class Elevator {
     // Servo that clamp the cube
     private  Servo leftServo;
     private  Servo rightServo;
+    private double startL;
+    private double startR;
 
-    public Elevator(BBMotor pivotL , BBMotor pivotR , BBMotor lead, Servo lServo ,Servo rServo ){
+    public Elevator(BBMotor pivotL ,BBMotor lead, Servo lServo ,Servo rServo ){
         this.armLPivot = pivotL;
-        this.armRPivot = pivotR;
         this.leadScrew = lead;
         this.leftServo = lServo;
         this.rightServo = rServo;
+        armLPivot.setMode(DcMotor.RunMode.RESET_ENCODERS);
+        armRPivot.setMode(DcMotor.RunMode.RESET_ENCODERS);
     }
 
+    public void pivotToUp(double angle){
+        armRPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armLPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        startL = armLPivot.getCurrentPos();
+        startR = armRPivot.getCurrentPos();
+        
+        armLPivot.setPower(0.5);
+        armRPivot.setPower(0.5);
+
+
+    }
 
 }

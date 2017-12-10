@@ -6,19 +6,20 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Hardware;
 
+import org.firstinspires.ftc.teamcode.Subsytems.Drivetrain;
+
 /**
  * Created by Darkn on 11/26/2017.
  */
 @TeleOp
 public class BB18TeleOp extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
-    BB18 robot =  new BB18(hardwareMap);
 
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
     }
-
+    private BB18 Robot = new BB18(hardwareMap);
 
 
 
@@ -46,5 +47,11 @@ public class BB18TeleOp extends OpMode {
     @Override
     public void loop() {
         telemetry.addData("Status", "Run Time: " + runtime.toString());
+        if(gamepad1.a){
+            Robot.Elevator.pivotToUp(10);
+        }
+        if(gamepad1.b){
+
+        }
     }
 }

@@ -9,6 +9,7 @@ import android.hardware.camera2.DngCreator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Subsytems.Elevator;
 import org.firstinspires.ftc.teamcode.Subsytems.Intake;
@@ -21,15 +22,21 @@ public class BB18Map {
 
     //Motors
     DcMotor leftFrontDrive;
-    //DcMotor leftBackDrive;
+    DcMotor leftBackDrive;
     DcMotor rightFrontDrive;
-    //DcMotor rightBackDrive;
+    DcMotor rightBackDrive;
     DcMotor intakeR;
     DcMotor intakeL;
+    DcMotor pivotL;
+    DcMotor pivotR;
+    DcMotor lead;
+    Servo   leftServ;
+    Servo   rightServ;
     DigitalChannel intakeLimit;
 
     // Class Map
     HardwareMap hwMap;
+
 
     public BB18Map() {
         //Empty on purpose
@@ -37,13 +44,21 @@ public class BB18Map {
 
     public void init(HardwareMap hardwareMap) {
         this.hwMap = hardwareMap;
+
+        //Elevator
+        pivotL = hwMap.get(DcMotor.class, "pivotL");
+        pivotR =  hwMap.get(DcMotor.class,"pivotR");
+        lead = hwMap.get(DcMotor.class,"lead");
+        leftServ = hwMap.get(Servo.class, "leftServ");
+        rightServ = hwMap.get(Servo.class, "rightServ");
+        // intake
         intakeL = hwMap.get(DcMotor.class, "intakeL");
         intakeR = hwMap.get(DcMotor.class,"intakeR");
         intakeLimit  = hwMap.get(DigitalChannel.class ,"intakeLimit");
-        // Motors
+        // DriveTrain Motors
         leftFrontDrive = hwMap.get(DcMotor.class, "leftF");
-        //leftBackDrive = hwMap.get(DcMotor.class, "leftB");
+        leftBackDrive = hwMap.get(DcMotor.class, "leftB");
         rightFrontDrive = hwMap.get(DcMotor.class, "rightF");
-        //rightBackDrive = hwMap.get(DcMotor.class, "rightB");
+        rightBackDrive = hwMap.get(DcMotor.class, "rightB");
     }
 }
