@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBMotor;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by josh on 12/1/17.
  */
@@ -16,7 +18,13 @@ public class Intake {
 
     //Timing
     ElapsedTime timer = new ElapsedTime();
+    double relativeTime = 0;
 
+    /**
+     * Intake class used for intaking glyphs
+     * @param lTake left BBMotor of the intake
+     * @param rTake right BBMotor of the intake
+     */
     public Intake(BBMotor lTake, BBMotor rTake) {
         leftTake = lTake;
         rightTake = rTake;
@@ -37,11 +45,19 @@ public class Intake {
         }
     }
 
-    public boolean timeRun(double seconds) {
-        timer.reset();
-        while(timer.seconds() < seconds) {
+    public void resetTiming() {
+        relativeTime = timer.time(TimeUnit.SECONDS);
 
-        }
-        return true; //TODO: this
+    }
+
+    /**
+     * runs the intake for the given amount of time in seconds
+     * @param seconds given amount of time in seconds
+     * @return if the intake has been running for that amount of time
+     */
+    public boolean timeRun(double seconds) {
+        double goal = relativeTime + seconds;
+        intake(false);
+        return timer.time(TimeUnit.SECONDS) >= goal;
     }
 }

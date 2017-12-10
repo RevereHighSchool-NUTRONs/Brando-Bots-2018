@@ -19,6 +19,8 @@ public class BB18Map {
     DcMotor leftBackDrive;
     DcMotor rightFrontDrive;
     DcMotor rightBackDrive;
+    DcMotor leftTake;
+    DcMotor rightTake;
 
     //IMU
     BNO055IMU gyro;
@@ -40,6 +42,8 @@ public class BB18Map {
         leftBackDrive = hardwareMap.get(DcMotor.class, "leftB");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rightF");
         rightBackDrive = hardwareMap.get(DcMotor.class, "rightB");
+        leftTake = hardwareMap.get(DcMotor.class, "leftT");
+        rightTake = hardwareMap.get(DcMotor.class, "rightT");
         gyro = hardwareMap.get(BNO055IMU.class, "gyro"); //IMU
     }
 
