@@ -12,7 +12,7 @@ public class Drivetrain {
     public BBMotor leftFrontDrive;
     public BBMotor leftBackDrive;
     public BBMotor rightFrontDrive;
-    public BBMotor rightBackDrive;
+    public BBMotor rightBackDrive; 
 
     //Wheel Circumfrence
     private final double wheelCircumfrence = Math.PI * 3.875; //Meters

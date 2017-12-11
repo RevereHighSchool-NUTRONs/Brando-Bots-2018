@@ -44,10 +44,10 @@ public class BB18 {
         intakeL = new BBMotor(hardware.intakeL, BBMotor.MotorType.NeveRest);
         intakeR = new BBMotor(hardware.intakeR, BBMotor.MotorType.NeveRest);
         //elevator init
-        elevatorL = new BBMotor(hardware.pivotL, BBMotor.MotorType.RevCoreHex);
-        lead =  new BBMotor(hardware.lead, BBMotor.MotorType.RevCoreHex);
+        //elevatorL = new BBMotor(hardware.pivotL, BBMotor.MotorType.RevCoreHex);
+        //lead =  new BBMotor(hardware.lead, BBMotor.MotorType.RevCoreHex);
         //
-        Elevator =  new Elevator(elevatorL,lead,leftServ,rightServ);
+        //Elevator =  new Elevator(elevatorL,lead,leftServ,rightServ);
 
         Dt =  new Drivetrain(leftFrontDrive,leftBackDrive, rightFrontDrive,rightBackDrive);
       }

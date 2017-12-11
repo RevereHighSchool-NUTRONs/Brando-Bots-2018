@@ -29,6 +29,7 @@ public class BB18TeleOp extends OpMode {
        */
     @Override
     public void init_loop() {
+
     }
 
     /*
@@ -48,10 +49,11 @@ public class BB18TeleOp extends OpMode {
     public void loop() {
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         if(gamepad1.a){
-            Robot.Elevator.pivotToUp(10);
+     //       Robot.Elevator.pivotToUp(10);
         }
         if(gamepad1.b){
 
         }
+        Robot.Dt.drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
     }
 }

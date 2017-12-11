@@ -46,7 +46,7 @@ public class BB18Map {
         this.hwMap = hardwareMap;
 
         //Elevator
-        pivotL = hwMap.get(DcMotor.class, "pivotL");
+       /* pivotL = hwMap.get(DcMotor.class, "pivotL");
         pivotR =  hwMap.get(DcMotor.class,"pivotR");
         lead = hwMap.get(DcMotor.class,"lead");
         leftServ = hwMap.get(Servo.class, "leftServ");
@@ -55,6 +55,7 @@ public class BB18Map {
         intakeL = hwMap.get(DcMotor.class, "intakeL");
         intakeR = hwMap.get(DcMotor.class,"intakeR");
         intakeLimit  = hwMap.get(DigitalChannel.class ,"intakeLimit");
+        */
         // DriveTrain Motors
         leftFrontDrive = hwMap.get(DcMotor.class, "leftF");
         leftBackDrive = hwMap.get(DcMotor.class, "leftB");

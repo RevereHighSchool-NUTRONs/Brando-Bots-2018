@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.Hardware.BBMotor;
 
 public class Elevator {
     private BBMotor armLPivot;
-    private BBMotor armRPivot;
     private BBMotor leadScrew;
     // Servo that clamp the cube
     private  Servo leftServo;
@@ -25,17 +24,12 @@ public class Elevator {
         this.leftServo = lServo;
         this.rightServo = rServo;
         armLPivot.setMode(DcMotor.RunMode.RESET_ENCODERS);
-        armRPivot.setMode(DcMotor.RunMode.RESET_ENCODERS);
     }
 
-    public void pivotToUp(double angle){
-        armRPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    public void pivot(double angle){
         armLPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         startL = armLPivot.getCurrentPos();
-        startR = armRPivot.getCurrentPos();
-        
-        armLPivot.setPower(0.5);
-        armRPivot.setPower(0.5);
+
 
 
     }
