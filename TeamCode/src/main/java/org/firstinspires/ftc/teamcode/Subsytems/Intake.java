@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 public class Intake {
 
     //Motors Declared
-    BBMotor leftTake = null;
-    BBMotor rightTake = null;
+    BBMotor leftTake;
+    BBMotor rightTake;
 
     //Timing
     ElapsedTime timer = new ElapsedTime();
@@ -36,18 +36,17 @@ public class Intake {
      */
     public void intake(boolean spit) {
         if(!spit) {
-            leftTake.setPower(1.0);
-            rightTake.setPower(-1.0);
-        }
-        else {
             leftTake.setPower(-1.0);
             rightTake.setPower(1.0);
+        }
+        else {
+            leftTake.setPower(1.0);
+            rightTake.setPower(-1.0);
         }
     }
 
     public void resetTiming() {
         relativeTime = timer.time(TimeUnit.SECONDS);
-
     }
 
     /**

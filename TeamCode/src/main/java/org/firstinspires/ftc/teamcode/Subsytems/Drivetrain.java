@@ -61,6 +61,8 @@ public class Drivetrain {
         wheelCircumfrence = Math.PI * (1/3); // Feet
         ticksPerRev = leftFrontDrive.getCountsPerRev();
         feetPerTick = wheelCircumfrence / ticksPerRev;
+
+        this.gyro = gyro;
     }
 
     private double getRelativeEncoderPos() {
@@ -91,6 +93,10 @@ public class Drivetrain {
         headingToHold = angleToHold;
     }
 
+    public void grabAngleToHold() {
+        headingToHold = gyro.getAngle();
+    }
+
     /**
      * Turns robot to specified angle using simple P loop
      * @param angleSetpoint specified angle
@@ -116,9 +122,9 @@ public class Drivetrain {
             lP += turn;
             rP -= turn;
         }
-        leftFrontDrive.setPower(lP);
-        leftBackDrive.setPower(lP);
-        rightFrontDrive.setPower(-rP);
-        rightBackDrive.setPower(-rP);
+        leftFrontDrive.setPower(-lP);
+        leftBackDrive.setPower(-lP);
+        rightFrontDrive.setPower(rP);
+        rightBackDrive.setPower(rP);
     }
 }

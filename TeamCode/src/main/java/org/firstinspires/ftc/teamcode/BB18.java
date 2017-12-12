@@ -24,6 +24,7 @@ public class BB18 {
     public BBMotor leftTake;
     public  BBMotor rightTake;
     public Intake BBTake;
+
     //IMU
     public BBGyro gyro;
 
@@ -47,11 +48,12 @@ public class BB18 {
         gyro = new BBGyro(robotMap.gyro); // Assigning IMU
         BBDrive = new Drivetrain(leftFrontDrive, leftBackDrive, rightFrontDrive, rightBackDrive, gyro);
 
+        /*
         //Assigning Intake Motors and Object
         leftTake = new BBMotor(robotMap.leftTake, BBMotor.MotorType.NeveRest);
         rightTake = new BBMotor(robotMap.rightTake, BBMotor.MotorType.NeveRest);
         BBTake = new Intake(leftTake, rightTake);
-
+        */
 
     }
 
