@@ -127,4 +127,8 @@ public class Drivetrain {
         rightFrontDrive.setPower(rP);
         rightBackDrive.setPower(rP);
     }
+
+    public void stopDT() {
+        drive(0.0, 0.0, false);
+    }
 }

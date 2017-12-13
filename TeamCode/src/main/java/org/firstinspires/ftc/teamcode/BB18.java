@@ -20,7 +20,7 @@ public class BB18 {
     public BBMotor rightBackDrive;
     public Drivetrain BBDrive;
 
-    //Declaring intake motors and onject
+    //Declaring intake motors and obNrject
     public BBMotor leftTake;
     public  BBMotor rightTake;
     public Intake BBTake;

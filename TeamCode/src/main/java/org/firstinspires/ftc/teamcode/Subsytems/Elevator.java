@@ -54,6 +54,14 @@ public class Elevator {
         }
     }
 
+    public void stopElevate() {
+        stageMotor.setPower(0.0);
+    }
+
+    public void stopPivot() {
+        pivotArm.setPower(0.0);
+    }
+
     public void openGrabbers() {
         leftGrabber.setPosition(0.0);
         rightGrabber.setPosition(0.0);
