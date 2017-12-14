@@ -100,9 +100,9 @@ public class Elevator {
         return timer.time(TimeUnit.SECONDS) >= goal;
     }
 
-    public boolean timeRunPivot(double seconds, boolean down) {
+    public boolean timeRunPivot(double angle ,double seconds, boolean down ) {
         double goal = relativeTime + seconds;
-        pivot(down);
+        pivot(angle,down);
         return timer.time(TimeUnit.SECONDS) >= goal;
     }
 
