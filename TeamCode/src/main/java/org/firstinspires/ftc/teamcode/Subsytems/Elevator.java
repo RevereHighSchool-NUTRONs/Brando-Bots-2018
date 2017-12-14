@@ -14,12 +14,22 @@ import java.util.concurrent.TimeUnit;
 public class Elevator {
 
     //Motors Declared
-    BBMotor pivotArm;
-    BBMotor stageMotor;
+    private BBMotor pivotArm;
+    private BBMotor stageMotor;
 
     //Servos Declared
-    Servo leftGrabber;
-    Servo rightGrabber;
+    private Servo leftGrabber;
+    private Servo rightGrabber;
+    // PID constants
+    private final double Kp = 0;
+    private final double Kd = 0;
+    private double relativeticks = 0;
+    //motor specs
+    private double pPR;
+    private double degreepertick;
+    private double preError = 0;
+    private double pretime = 0;
+    private double tolerance = 0;
 
     //Timing
     ElapsedTime timer = new ElapsedTime();
@@ -30,6 +40,8 @@ public class Elevator {
         this.stageMotor = stageMotor;
         this.leftGrabber = lG;
         this.rightGrabber = rG;
+        pPR = pivotArm.getCountsPerRev();
+        degreepertick = pPR / 360;
     }
 
     public void resetTiming() {
@@ -39,19 +51,29 @@ public class Elevator {
     public void elevate(boolean down) {
         if (!down) {
             stageMotor.setPower(1.0);
-        }
-        else {
+        } else {
             stageMotor.setPower(-1.0);
         }
+
+    }
+    public Boolean pivotPID(double tAngle) {
+        double setpoint = tAngle / degreepertick;
+        double error = setpoint - (pivotArm.getCurrentPos()+ relativeticks) ;
+        double currentTime = timer.seconds();
+        double dt = currentTime - pretime;
+        pretime  = currentTime;
+        double output =  (Kp * error)+( dt / (error - preError)) * Kd;
+        pivot(output, true);
+        error = setpoint - (pivotArm.getCurrentPos() + relativeticks ) ;
+        return tolerance  > error ;
     }
 
-    public void pivot(boolean down) {
-        if (!down) {
-            pivotArm.setPower(1.0);
-        }
-        else {
-            pivotArm.setPower(-1.0);
-        }
+    public void pivot(double angle, Boolean Pid) {
+            if (Pid){
+                pivotArm.setPower(angle);
+            }else{
+                pivotArm.setPower(0);
+            }
     }
 
     public void stopElevate() {
