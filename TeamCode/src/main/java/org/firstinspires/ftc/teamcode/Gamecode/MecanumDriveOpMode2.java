@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.SensorBNO055IMU;
 import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBGyro;
 
 /**
- * Created by josh on 11/28/17.
+ * Created by Josh on 11/28/17.
  */
 
 @TeleOp(name="Mecanum 2", group="Gamecode")

@@ -6,11 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.BB18;
 
 /**
- * Created by Josh on 11/28/17.
+ * Created by josh on 11/28/17.
  */
 
-@TeleOp(name="Driver", group="Gamecode")
-public class DriveWithHeading extends OpMode
+@TeleOp(name="BB Tele-Op 1.0 I", group="Gamecode")
+public class BBOpModeJustIntake extends OpMode
 {
     BB18 robot;
 
@@ -33,16 +33,18 @@ public class DriveWithHeading extends OpMode
 
     @Override
     public void loop() {
-        double leftPow = gamepad1.left_stick_y;
-        double rightPow = gamepad1.right_stick_y;
-
-        robot.BBDrive.drive(leftPow, rightPow, false);
-
-        if(gamepad1.right_bumper) {
-            robot.BBDrive.grabAngleToHold();
+        /* Operator Control */
+        if(gamepad2.a) {
+            robot.BBTake.intake(false);
         }
-        if(gamepad1.left_bumper) {
-            robot.BBDrive.drive(leftPow, rightPow, true);
+        else {
+            robot.BBTake.stopIntake();
+        }
+        if(gamepad2.b) {
+            robot.BBTake.intake(true);
+        }
+        else {
+            robot.BBTake.stopIntake();
         }
     }
 

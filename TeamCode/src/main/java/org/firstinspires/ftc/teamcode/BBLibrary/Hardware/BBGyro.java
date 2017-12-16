@@ -43,7 +43,8 @@ public class BBGyro {
      */
     public double getAngle() {
         angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        return angles.thirdAngle;
+        return angles.firstAngle;
     }
+
 
 }

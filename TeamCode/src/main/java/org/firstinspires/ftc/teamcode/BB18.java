@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBGyro;
 import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBMotor;
 import org.firstinspires.ftc.teamcode.Subsytems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subsytems.Elevator;
 import org.firstinspires.ftc.teamcode.Subsytems.Intake;
 
 /**
@@ -14,20 +16,28 @@ import org.firstinspires.ftc.teamcode.Subsytems.Intake;
 public class BB18 {
 
     //Declaring drivetrain motors and objects
-    public BBMotor leftFrontDrive;
-    public BBMotor leftBackDrive;
-    public BBMotor rightFrontDrive;
-    public BBMotor rightBackDrive;
+    private BBMotor leftFrontDrive;
+    private BBMotor leftBackDrive;
+    private BBMotor rightFrontDrive;
+    private BBMotor rightBackDrive;
+    private BBGyro gyro; //IMU
+    private Servo jewelArm;
+
     public Drivetrain BBDrive;
 
-    //Declaring intake motors and obNrject
-    public BBMotor leftTake;
-    public  BBMotor rightTake;
+    //Declaring intake motors and objects
+    private BBMotor leftTake;
+    private BBMotor rightTake;
+
     public Intake BBTake;
 
-    //IMU
-    public BBGyro gyro;
+    //Declaring elevator motors and objects
+    private BBMotor stageMotor;
+    private BBMotor pivotArm;
+    private Servo leftGrabber;
+    private Servo rightGrabber;
 
+    public Elevator BBElevator;
 
     BB18Map robotMap;
 
@@ -45,15 +55,22 @@ public class BB18 {
         leftBackDrive = new BBMotor(robotMap.leftBackDrive, BBMotor.MotorType.RevHDHex);
         rightFrontDrive = new BBMotor(robotMap.rightFrontDrive, BBMotor.MotorType.RevHDHex);
         rightBackDrive = new BBMotor(robotMap.rightBackDrive, BBMotor.MotorType.RevHDHex);
+        jewelArm = robotMap.jewelArm;
         gyro = new BBGyro(robotMap.gyro); // Assigning IMU
-        BBDrive = new Drivetrain(leftFrontDrive, leftBackDrive, rightFrontDrive, rightBackDrive, gyro);
+        BBDrive = new Drivetrain(leftFrontDrive, leftBackDrive, rightFrontDrive, rightBackDrive, gyro, jewelArm);
 
-        /*
         //Assigning Intake Motors and Object
         leftTake = new BBMotor(robotMap.leftTake, BBMotor.MotorType.NeveRest);
         rightTake = new BBMotor(robotMap.rightTake, BBMotor.MotorType.NeveRest);
         BBTake = new Intake(leftTake, rightTake);
-        */
+
+
+        //Assigning Elevator Motors and Object
+        stageMotor = new BBMotor(robotMap.stageMotor, BBMotor.MotorType.CoreHex);
+        pivotArm = new BBMotor(robotMap.pivotArm, BBMotor.MotorType.CoreHex);
+        leftGrabber = robotMap.leftGrabber;
+        rightGrabber = robotMap.rightGrabber;
+        BBElevator = new Elevator(pivotArm, stageMotor, leftGrabber, rightGrabber);
 
     }
 

@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBMotor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by josh on 12/1/17.
+ * Created by Josh on 12/1/17.
  */
 
 public class Intake {

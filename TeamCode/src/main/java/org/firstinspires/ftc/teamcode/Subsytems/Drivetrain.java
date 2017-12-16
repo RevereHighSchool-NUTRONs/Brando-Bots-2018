@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsytems;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBGyro;
@@ -14,8 +16,7 @@ public class Drivetrain {
     //PD constants for control g is for Gyro, k is for Drivetrain
     private final double kP = 1.0;
     private final double kD = 0.5;
-    private final double gP = 1.0;
-    private final double gD = 0.5;
+    private final double gP = 0.25;
 
 
     //Motors declared
@@ -24,8 +25,10 @@ public class Drivetrain {
     private BBMotor rightFrontDrive;
     private BBMotor rightBackDrive;
 
+    private Servo jewelArm;
+
     //Gyro declared
-    private BBGyro gyro;
+    public BBGyro gyro;
 
 
     //Declaring drivetrain specifics for driving distance
@@ -37,12 +40,12 @@ public class Drivetrain {
     ElapsedTime timer = new ElapsedTime();
 
     //Auto Constants
-    private double lastError = 0.;
-    private double lastTime = 0.;
-    private double relativeClicks = 0.;
-    private double headingToHold = 0.;
-    private double driveDistanceTolerance = 20;
-    private double turnToAngleTolerance = 5;
+    private double lastError = 0.0;
+    private double lastTime = 0.0;
+    private double relativeClicks = 0.0;
+    private double headingToHold = 0.0;
+    private double driveDistanceTolerance = 224.0;
+    private double turnToAngleTolerance = 36.0;
 
 
     /**
@@ -51,16 +54,22 @@ public class Drivetrain {
      * @param rF right front motor of the drivetrain
      * @param gyro gyro used for heading
      */
-    public Drivetrain(BBMotor lF, BBMotor lB, BBMotor rF, BBMotor rB, BBGyro gyro) {
+    public Drivetrain(BBMotor lF, BBMotor lB, BBMotor rF, BBMotor rB, BBGyro gyro, Servo jewelArm) {
         this.leftFrontDrive = lF;
         this.rightFrontDrive = rF;
         this.leftBackDrive = lB;
         this.rightBackDrive = rB;
+        this.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        this.jewelArm = jewelArm;
 
         //Drivetrain specifics initialized
-        wheelCircumfrence = Math.PI * (1/3); // Feet
+        wheelCircumfrence = 1.0144725; // Feet
         ticksPerRev = leftFrontDrive.getCountsPerRev();
-        feetPerTick = wheelCircumfrence / ticksPerRev;
+        feetPerTick = wheelCircumfrence/ticksPerRev;
 
         this.gyro = gyro;
     }
@@ -75,17 +84,17 @@ public class Drivetrain {
         double now = timer.seconds();
         double dt = now - lastTime;
         lastTime = now;
-        double output = (kP * error) + ((kD * (error - lastError)) / dt);
+        double output = (kP * error) + ((kD * ((error - lastError)) / dt));
         drive(output, output, true);
         lastError = error;
-        error = setpoint - getRelativeEncoderPos();
-        return driveDistanceTolerance > error;
+        return driveDistanceTolerance > Math.abs(error);
     }
+
 
     public void resetDriveDistance() {
         relativeClicks = leftFrontDrive.getCurrentPos();
-        lastError = 0.;
-        lastTime = 0.;
+        lastError = 0.0;
+        lastTime = 0.0;
         timer.reset();
     }
 
@@ -97,6 +106,7 @@ public class Drivetrain {
         headingToHold = gyro.getAngle();
     }
 
+
     /**
      * Turns robot to specified angle using simple P loop
      * @param angleSetpoint specified angle
@@ -106,7 +116,15 @@ public class Drivetrain {
        double angleDifference = angleSetpoint - gyroHeading;
        double turn = gP * angleDifference;
        drive(turn, -turn, false);
-       return turnToAngleTolerance > angleDifference;
+       return turnToAngleTolerance > Math.abs(angleDifference);
+   }
+
+   public double getLastError() {
+       return lastError;
+   }
+
+   public double getLfEnc() {
+       return leftFrontDrive.getCurrentPos();
    }
 
     /**
@@ -119,13 +137,28 @@ public class Drivetrain {
             double gyroHeading = gyro.getAngle();
             double angleDifference = headingToHold - gyroHeading;
             double turn = gP * angleDifference;
-            lP += turn;
-            rP -= turn;
+            lP -= turn;
+            rP += turn;
         }
         leftFrontDrive.setPower(-lP);
         leftBackDrive.setPower(-lP);
         rightFrontDrive.setPower(rP);
         rightBackDrive.setPower(rP);
+    }
+
+    public void stopDrive() {
+        leftFrontDrive.setPower(0.0);
+        leftBackDrive.setPower(0.0);
+        rightFrontDrive.setPower(0.0);
+        rightBackDrive.setPower(0.0);
+    }
+
+    public void jewelArmUp() {
+        jewelArm.setPosition(0.0);
+    }
+
+    public void jewelArmDown() {
+        jewelArm.setPosition(1.0);
     }
 
     public void stopDT() {

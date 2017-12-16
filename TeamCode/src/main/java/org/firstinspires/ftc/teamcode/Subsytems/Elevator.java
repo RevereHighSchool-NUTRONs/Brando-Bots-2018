@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.BBLibrary.Hardware.BBMotor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by josh on 12/12/17.
+ * Created by Josh on 12/12/17.
  */
 
 public class Elevator {
@@ -52,6 +52,14 @@ public class Elevator {
         else {
             pivotArm.setPower(-1.0);
         }
+    }
+
+    public void directElevate(double pow) {
+        stageMotor.setPower(pow);
+    }
+
+    public void directPivot(double pow) {
+        pivotArm.setPower(pow);
     }
 
     public void stopElevate() {

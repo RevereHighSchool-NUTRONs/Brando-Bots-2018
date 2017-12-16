@@ -71,7 +71,9 @@ public class BBMotor {
      * Returns the power being supplied to the BBMotor.
      * @return power being supplied to motor.
      */
-    public double getPower() { return m.getPower(); }
+    public double getPower() {
+        return m.getPower();
+    }
 
     /**
      * Returns the set motor type of this motor.
