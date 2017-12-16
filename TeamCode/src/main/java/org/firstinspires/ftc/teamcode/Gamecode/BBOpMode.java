@@ -49,24 +49,19 @@ public class BBOpMode extends OpMode
         double stagePow = gamepad2.left_stick_y;
         double elevatorPow = gamepad2.right_stick_y;
         robot.BBElevator.directElevate(elevatorPow);
-        robot.BBElevator.directPivot(stagePow);
+        robot.BBElevator.directPivot(stagePow/ 2);
         if(gamepad2.right_bumper) {
             robot.BBTake.intake(false);
-        }
-        else {
-            robot.BBTake.stopIntake();
-        }
-        if(gamepad2.left_bumper) {
+        }  else if (gamepad2.left_bumper) {
             robot.BBTake.intake(true);
-        }
-        else {
+        } else {
             robot.BBTake.stopIntake();
         }
         if(gamepad2.a) {
-            robot.BBElevator.openGrabbers();
+            robot.BBElevator.openGrabbers(1.0);
         }
         if(gamepad2.b) {
-            robot.BBElevator.closeGrabbers();
+            robot.BBElevator.closeGrabbers(-1.0);
         }
         telemetry.addData("Gyro Angle:", robot.BBDrive.gyro.getAngle());
     }

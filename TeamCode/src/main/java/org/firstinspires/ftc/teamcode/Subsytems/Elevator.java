@@ -42,6 +42,8 @@ public class Elevator {
         this.rightGrabber = rG;
         pPR = pivotArm.getCountsPerRev();
         degreepertick = pPR / 360;
+        leftGrabber.setDirection(Servo.Direction.FORWARD);
+        rightGrabber.setDirection(Servo.Direction.FORWARD);
     }
 
     public void resetTiming() {
@@ -92,14 +94,15 @@ public class Elevator {
         pivotArm.setPower(0.0);
     }
 
-    public void openGrabbers() {
-        leftGrabber.setPosition(0.0);
-        rightGrabber.setPosition(0.0);
+    public void openGrabbers(double open) {
+        leftGrabber.setPosition(-open);
+        rightGrabber.setPosition(open);
+
     }
 
-    public void closeGrabbers() {
-        leftGrabber.setPosition(1.0);
-        rightGrabber.setPosition(1.0);
+    public void closeGrabbers(double close) {
+        leftGrabber.setPosition(-close);
+        rightGrabber.setPosition(close);
     }
 
     public boolean timeRunElevator(double seconds, boolean down) {
